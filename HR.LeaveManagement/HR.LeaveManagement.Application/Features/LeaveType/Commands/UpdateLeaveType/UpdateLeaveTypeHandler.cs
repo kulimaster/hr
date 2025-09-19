@@ -4,7 +4,7 @@ using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 
-public class CreatedLeaveTypeHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper) : IRequestHandler<UpdateLeaveTypeCommand, Unit>
+public class UpdateLeaveTypeHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper) : IRequestHandler<UpdateLeaveTypeCommand, Unit>
 {
     public async Task<Unit> Handle(UpdateLeaveTypeCommand request, CancellationToken cancellationToken)
     {

@@ -8,7 +8,11 @@ public class CreateLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeReposit
 {
     public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        //validate Data - Fluent Validation
+        var validationResult = await new CreatedLeaveTypeCommandValidator().ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            throw new (validationResult.Errors.First().ErrorMessage);
+        }
         var leaveType = mapper.Map<Domain.LeaveType>(request);
         var createdLeaveType = await leaveTypeRepository.AddAsync(leaveType);
         return createdLeaveType.Id;
